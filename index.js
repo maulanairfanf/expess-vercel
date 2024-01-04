@@ -1,22 +1,19 @@
- const express = require('express')
+const express = require('express');
+const app = express();
 
-    const app = express()
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
-    app.get('/', (req, res) => {
-        res.send('Express JS on Vercel')
-    })
+const cors = require('cors');
+app.use(cors());
 
-    app.get('/ping', (req, res) => {
-        res.send('pong 🏓')
-    })
+const morgan = require('morgan');
+app.use(morgan('dev'));
 
-    const port = process.env.PORT || 8080
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
-    app.listen(port, (err, res) => {
-        if (err) {
-            console.log(err)
-            return res.status(500).send(err.message)
-        } else {
-            console.log('[INFO] Server Running on port:', port)
-        }
-    })
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
